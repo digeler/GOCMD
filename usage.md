@@ -2,7 +2,7 @@
   
   This tool was created to collect logs from inside aks nodes.  how it works :  it uses the az vm run-command  here are the steps :  - First it will create storage account at the same RG as your AKS MC_  - Mount the share on the vm so we can move the logs there  -It will start to collect the logs from each node   -Logs collected : journalctl -u kube* and cluster provision log.  -All the logs will be in the storage account.  -You Can then download the logs and share with css.
   
-   for question you can meet me here : http://slack.thegbsguy.com
+   for questions you can meet me here : http://slack.thegbsguy.com
 
 How to install and run the code : -open cloudshel ,select the correct subscription and cd to your Clouddrive folde -Clone the project : git clone https://github.com/digeler/GOCMD.git -Edit the Auth file inside the GOCMD folder :
 
