@@ -15,7 +15,9 @@ How to install and run the code : -open cloudshel ,select the correct subscripti
 "managementEndpointUrl": "https://management.core.windows.net/",  
 "rgname": "MC_sql1_aks1_westeurope",  "location": "westeurope"
 }
-     -Copy the executable to be on the same folder as auth : cp k8scollectorlinux/k8scollector .  if all is good you can run the exec :  ./k8scollector  it will ask :  please enter the full path to the auth file  just type auth  the code will run and at the end collect the logs and do the cleanup     
+     -Copy the executable to be on the same folder as auth : cp k8scollectorlinux/k8scollector .  if all is good you can run the exec :  ./k8scollector  it will ask :  please enter the full path to the auth file  just type auth  the code will run and at the end collect the logs and do the cleanup   
+     
+     for question you can meet me here : http://slack.thegbsguy.com
 
 The MIT License (MIT)
 
