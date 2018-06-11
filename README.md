@@ -43,7 +43,8 @@ How to install and run the code :
    
    
   to see it in action goto :
-  https://youtu.be/IAbXuSNHrAU
+  
+ link to site:  https://digeler.github.io/GOCMD/.
   
   
   
