@@ -1,6 +1,8 @@
   Gocollector v1.0 
   
   This tool was created to collect logs from inside aks nodes.  how it works :  it uses the az vm run-command  here are the steps :  - First it will create storage account at the same RG as your AKS MC_  - Mount the share on the vm so we can move the logs there  -It will start to collect the logs from each node   -Logs collected : journalctl -u kube* and cluster provision log.  -All the logs will be in the storage account.  -You Can then download the logs and share with css.
+  
+   for question you can meet me here : http://slack.thegbsguy.com
 
 How to install and run the code : -open cloudshel ,select the correct subscription and cd to your Clouddrive folde -Clone the project : git clone https://github.com/digeler/GOCMD.git -Edit the Auth file inside the GOCMD folder :
 
@@ -17,7 +19,7 @@ How to install and run the code : -open cloudshel ,select the correct subscripti
 }
      -Copy the executable to be on the same folder as auth : cp k8scollectorlinux/k8scollector .  if all is good you can run the exec :  ./k8scollector  it will ask :  please enter the full path to the auth file  just type auth  the code will run and at the end collect the logs and do the cleanup   
      
-     for question you can meet me here : http://slack.thegbsguy.com
+     
 
 The MIT License (MIT)
 
