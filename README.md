@@ -1,3 +1,3 @@
-for instruction go to :
+for instructions go to :
 
 https://digeler.github.io/GOCMD/
