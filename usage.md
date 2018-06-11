@@ -4,7 +4,7 @@ How to install and run the code : -open cloudshel ,select the correct subscripti
 
 {  "clientId": "", -------->make sure the appid is at least owner on the rg.  "clientSecret": "****",  "subscriptionId": "928f4e7e-2c28-4063-a56e-6f1e6f2bb73c",  "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",  "resourceManagerEndpointUrl": "https://management.azure.com/",  "activeDirectoryGraphResourceId": "https://graph.windows.net/",  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",  "galleryEndpointUrl": "https://gallery.azure.com/",  "managementEndpointUrl": "https://management.core.windows.net/",  "rgname": "MC_sql1_aks1_westeurope",  "location": "westeurope"
 
- }    -Copy the executable to be on the same folder as auth : cp k8scollectorlinux/k8scollector .  if all is good you can run the exec :  ./k8scollector  it will ask :  please enter the full path to the auth file  just type auth  the code will run and at the end collect the logs and do the cleanup      to see it in action goto :    link to site: https://digeler.github.io/GOCMD/.    
+ }    -Copy the executable to be on the same folder as auth : cp k8scollectorlinux/k8scollector .  if all is good you can run the exec :  ./k8scollector  it will ask :  please enter the full path to the auth file  just type auth  the code will run and at the end collect the logs and do the cleanup     
 
 The MIT License (MIT)
 
