@@ -1,3 +1,6 @@
+open the File IN RAW mode ,for easy reading 
+
+
 This tool was created to collect logs from inside aks nodes.
 how it works :
 it uses the az vm run-command
