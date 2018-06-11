@@ -1,16 +1,16 @@
-open the File IN RAW mode ,for easy reading 
 
 
-This tool was created to collect logs from inside aks nodes.
-how it works :
-it uses the az vm run-command
-here are the steps :
-- First it will create storage account at the same RG as your AKS MC_
-- Mount the share on the vm so we can move the logs there
--It will start to collect the logs from each node 
--Logs collected : journalctl -u kube* and cluster provision log.
--All the logs will be in the storage account.
--You Can then download the logs and share with css.
+
+ This tool was created to collect logs from inside aks nodes.
+ how it works :
+ it uses the az vm run-command
+ here are the steps :
+ - First it will create storage account at the same RG as your AKS MC_
+ - Mount the share on the vm so we can move the logs there
+ -It will start to collect the logs from each node 
+  -Logs collected : journalctl -u kube* and cluster provision log.
+ -All the logs will be in the storage account.
+ -You Can then download the logs and share with css.
 
 How to install and run the code :
 -open cloudshel ,select the correct subscription and cd to your Clouddrive folde
