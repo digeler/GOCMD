@@ -114,7 +114,7 @@ func dooper(vmname string, rgname string, storagename string) {
 	*/
 	//cmd := exec.Command("az", "vm", "run-command", "invoke", "--resource-group", rgname, "--name", vmname, "--command-id", "RunShellScript", "--scripts", "mkdir /mnt/forlogs")
 	mycmd := buf.String()
-	fmt.Println("\nGoing to execute", mycmd)
+	fmt.Println("\nGoing to execute\n", mycmd)
 
 	usr, _ := user.Current()
 
