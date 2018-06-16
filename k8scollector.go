@@ -54,7 +54,10 @@ func dooper(vmname string, rgname string, storagename string) {
 	}
 	//args := []string{"vm", "run-command", "invoke", "--resource-group", rgname, "--name", vmname, "--command-id", "RunShellScript", "--scripts", "sudo", "mount", "-t cifs", "//", storagename, ".file.core.windows.net/k8logs", "/mnt/forlogs", "-o", "vers=3.0,", "username=", storagename, ",password=", global, ",dir_mode=0777", ",file_mode=0777", ",sec=ntlmssp"}
 	buf := bytes.Buffer{}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7b77c58b2045a1a4063e157bb37208f983db4c05
 	//install cifs
 	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
 	buf.WriteString(" --name " + vmname)
