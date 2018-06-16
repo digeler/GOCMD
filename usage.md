@@ -13,6 +13,7 @@
   then press ctrl+c and run the modified cmd.sh 
   once done just delete the storage.
   ill fix that in next release
+  easy way is to run it on cloudshell
   
 
   for OSX :
