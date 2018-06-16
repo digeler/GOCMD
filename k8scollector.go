@@ -54,6 +54,13 @@ func dooper(vmname string, rgname string, storagename string) {
 	}
 	//args := []string{"vm", "run-command", "invoke", "--resource-group", rgname, "--name", vmname, "--command-id", "RunShellScript", "--scripts", "sudo", "mount", "-t cifs", "//", storagename, ".file.core.windows.net/k8logs", "/mnt/forlogs", "-o", "vers=3.0,", "username=", storagename, ",password=", global, ",dir_mode=0777", ",file_mode=0777", ",sec=ntlmssp"}
 	buf := bytes.Buffer{}
+
+	//install cifs
+	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
+	buf.WriteString(" --name " + vmname)
+	buf.WriteString(" --command-id RunShellScript --scripts ")
+	buf.WriteString("'sudo apt-get update && sudo apt-get install cifs-utils'\n")
+	///////////////////
 	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
 	buf.WriteString(" --name " + vmname)
 	buf.WriteString(" --command-id RunShellScript --scripts ")
@@ -76,7 +83,28 @@ func dooper(vmname string, rgname string, storagename string) {
 	buf.WriteString(" --command-id RunShellScript --scripts ")
 	buf.WriteString("'cp /var/log/azure/cluster-provision.log ")
 	buf.WriteString("/mnt/forlogs/" + vmname)
-	buf.WriteString(".cluster-provision.log'\n'")
+	buf.WriteString(".cluster-provision.log'\n")
+	//syslog//////////////////////////////////
+	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
+	buf.WriteString(" --name " + vmname)
+	buf.WriteString(" --command-id RunShellScript --scripts ")
+	buf.WriteString("'mkdir /mnt/forlogs/syslog" + vmname)
+	buf.WriteString(" && cp /var/log/syslog* /mnt/forlogs/syslog'" + vmname)
+	buf.WriteString("\n")
+	//journalall/////////////////////////////////////
+	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
+	buf.WriteString(" --name " + vmname)
+	buf.WriteString(" --command-id RunShellScript --scripts ")
+	buf.WriteString("'journalctl --no-pager >>")
+	buf.WriteString(" /mnt/forlogs/" + vmname)
+	buf.WriteString(".journal'\n")
+	//iptables/////////////////////////////////////////////////////
+	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
+	buf.WriteString(" --name " + vmname)
+	buf.WriteString(" --command-id RunShellScript --scripts ")
+	buf.WriteString("'sudo iptables -S >>")
+	buf.WriteString(" /mnt/forlogs/" + vmname)
+	buf.WriteString(".iptable'\n")
 
 	//packging files
 	/*buf.WriteString("az vm run-command invoke --resource-group " + rgname)
@@ -87,7 +115,7 @@ func dooper(vmname string, rgname string, storagename string) {
 	*/
 	//cmd := exec.Command("az", "vm", "run-command", "invoke", "--resource-group", rgname, "--name", vmname, "--command-id", "RunShellScript", "--scripts", "mkdir /mnt/forlogs")
 	mycmd := buf.String()
-	fmt.Println("\nGoing to execute", mycmd)
+	fmt.Println("\nGoing to execute\n", mycmd)
 
 	usr, _ := user.Current()
 
@@ -171,6 +199,12 @@ func main() {
 	}
 	groupsClient.Authorizer = token
 	//print info to the customer
+	fmt.Printf("\n\n")
+	k := color.New(color.FgCyan, color.Bold)
+	k.Printf("**********Please make sure you run az login and selected the correct sub,or else it fail **********\n\n\n")
+	color.Green("Press 'Enter' to continue...")
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
+
 	color.Yellow("make sure the correct details below : *********************** ")
 	color.Yellow("RG: %s\n", rgname)
 	color.Yellow("SUBID: %s\n", subid)
@@ -180,8 +214,10 @@ func main() {
 	color.Yellow("LOCATION: %s\n", location)
 	color.Yellow("PUBKEY: %s\n", sshpubkey)
 
-	color.Green("*********************************************************************")
+	color.Green("**************************************************************************************************************************")
 	color.Red("!!!This tool relies on vm guest agent make sure agent is ok!!!!")
+	color.Red("Also if the shell closes sooner as expected, you have the command at current dir name cmd.sh ,so you can run manually")
+	color.Green("**************************************************************************************************************************")
 	color.Green("Press 'Enter' to continue...")
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 
@@ -239,8 +275,11 @@ func main() {
 	//cleanup phase***********************
 	color.Blue("*********************************************************************")
 	color.Green("!!!Please make sure you copy all the needed files from the share as we are going to delete it as part of cleanup!!!!")
-	color.Green("Press 'Enter' to continue cleanup phase")
+	color.Green("Press 'Enter' 3 times to continue cleanup phase")
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
+	color.Green("Press 'Enter' if you sure you want to delete the storage account")
 	fmt.Println("Starting deleting storage account ", *n)
 	_, err = storageAccountsClient.Delete(ctx, rgname, *n)
 	if err != nil {
