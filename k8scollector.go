@@ -42,7 +42,6 @@ var (
 )
 
 func dooper(vmname string, rgname string, storagename string) {
-	//sudo mount -t cifs //k8logcjews.file.core.windows.net/k8logs [mount point] -o vers=3.0,username=k8logcjews,password=07HVJ0a01Av4AnY1ZZsTVs5A0wiwtjSBfrKhgvzG2n3kRvrz7khjnrZtKN4/Xphu3UCjadbE6X5F2VKQ/AlcTw==,dir_mode=0777,file_mode=0777,sec=ntlmssp
 
 	fmt.Println("Going to create the mount /mnt/forlogs/ on vm \n", vmname)
 
@@ -52,7 +51,7 @@ func dooper(vmname string, rgname string, storagename string) {
 	if err != nil {
 		fmt.Printf("Command finished with error: %v", err)
 	}
-	//args := []string{"vm", "run-command", "invoke", "--resource-group", rgname, "--name", vmname, "--command-id", "RunShellScript", "--scripts", "sudo", "mount", "-t cifs", "//", storagename, ".file.core.windows.net/k8logs", "/mnt/forlogs", "-o", "vers=3.0,", "username=", storagename, ",password=", global, ",dir_mode=0777", ",file_mode=0777", ",sec=ntlmssp"}
+
 	buf := bytes.Buffer{}
 
 	//install cifs
@@ -106,14 +105,6 @@ func dooper(vmname string, rgname string, storagename string) {
 	buf.WriteString(" /mnt/forlogs/" + vmname)
 	buf.WriteString(".iptable'\n")
 
-	//packging files
-	/*buf.WriteString("az vm run-command invoke --resource-group " + rgname)
-	buf.WriteString(" --name " + vmname)
-	buf.WriteString(" --command-id RunShellScript --scripts ")
-	buf.WriteString("'tar -cvf kubelogs.tar" + vmname)
-	buf.WriteString(" /mnt/forlogs/'")
-	*/
-	//cmd := exec.Command("az", "vm", "run-command", "invoke", "--resource-group", rgname, "--name", vmname, "--command-id", "RunShellScript", "--scripts", "mkdir /mnt/forlogs")
 	mycmd := buf.String()
 	fmt.Println("\nGoing to execute\n", mycmd)
 
@@ -124,15 +115,14 @@ func dooper(vmname string, rgname string, storagename string) {
 		fmt.Println(err)
 	}
 	defer f.Close()
-	//var out bytes.Buffer
-	//cmd.Stdout = &out
+
 	_, err = f.WriteString(mycmd)
 	if err != nil {
 		fmt.Printf("Command finished with error: %v", err)
 	}
 
 	f.Sync()
-	//fmt.Println(usr.HomeDir + "/cmd.sh")
+
 	cmd = exec.Command("sh", usr.HomeDir+"/cmd.sh")
 
 	err = cmd.Run()
@@ -143,11 +133,6 @@ func dooper(vmname string, rgname string, storagename string) {
 	cmd.Stdout = &out
 
 	color.Green("Log collection on vm done you can now fetch the logs from share k8logs at storage account named " + storagename)
-
-	//err := cmd.Run()
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
 
 	fmt.Printf(out.String())
 
@@ -264,12 +249,9 @@ func main() {
 		l := v.Name
 
 		dooper(*l, rgname, *n)
-		//dooper(vmname string, rgname string, storagename string, key string)
 
-		//fmt.Printf("%s\n", *l)
 		//env GOOS=linux GOARCH=amd64 go build -v main.go
 
-		//sudo mount -t cifs //k8logcjews.file.core.windows.net/k8logs [mount point] -o vers=3.0,username=k8logcjews,password=07HVJ0a01Av4AnY1ZZsTVs5A0wiwtjSBfrKhgvzG2n3kRvrz7khjnrZtKN4/Xphu3UCjadbE6X5F2VKQ/AlcTw==,dir_mode=0777,file_mode=0777,sec=ntlmssp
 	}
 
 	//cleanup phase***********************
