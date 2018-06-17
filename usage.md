@@ -47,6 +47,9 @@
      -Run az login and az account set --subscription ,to set your account 
      -Run the executable and give the path for the auth file
      
+     -executable file are in folders :k8collectorOSX ,v2ForLinux
+     
+     
      
 
 The MIT License (MIT)
