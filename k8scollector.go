@@ -46,7 +46,7 @@ func dooper(vmname string, rgname string, storagename string) {
 
 	fmt.Println("Going to create the mount /mnt/forlogs/ on vm \n", vmname)
 
-	cmd := exec.Command("az", "vm", "run-command", "invoke", "--resource-group", rgname, "--name", vmname, "--command-id", "RunShellScript", "--scripts", "mkdir /mnt/forlogs")
+	cmd := exec.Command("az", "vm", "run-command", "invoke", "--resource-group", rgname, "--name", vmname, "--command-id", "RunShellScript", "--scripts", "mkdir -p /mnt/forlogs")
 
 	err := cmd.Run()
 	if err != nil {
@@ -102,7 +102,7 @@ func dooper(vmname string, rgname string, storagename string) {
 	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
 	buf.WriteString(" --name " + vmname)
 	buf.WriteString(" --command-id RunShellScript --scripts ")
-	buf.WriteString("'sudo iptables -S >>")
+	buf.WriteString("'sudo iptables-save >>")
 	buf.WriteString(" /mnt/forlogs/" + vmname)
 	buf.WriteString(".iptable'\n")
 
