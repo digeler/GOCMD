@@ -6,6 +6,15 @@
 
   for windows :
   env GOOS=windows GOARCH=amd64 go build -v -o k8scollector.exe  k8scollector.go
+  
+  Please note windows might not work ,it has issues with using single string in the command.
+  run the command but dont delete the storage at end 
+  then you can take the file cmd.sh on your profile c:\users\username\cmd.sh and do replace all from ' to ""
+  then press ctrl+c and run the modified cmd.sh 
+  once done just delete the storage.
+  ill fix that in next release
+  easy way is to run it on cloudshell
+  
 
   for OSX :
   just compile on MAC
