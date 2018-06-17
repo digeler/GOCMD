@@ -59,7 +59,7 @@ func dooper(vmname string, rgname string, storagename string) {
 	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
 	buf.WriteString(" --name " + vmname)
 	buf.WriteString(" --command-id RunShellScript --scripts ")
-	buf.WriteString("''sudo apt-get update && sudo apt-get install cifs-utils'\n")
+	buf.WriteString("'sudo apt-get update && sudo apt-get install cifs-utils'\n")
 	///////////////////
 	buf.WriteString("az vm run-command invoke --resource-group " + rgname)
 	buf.WriteString(" --name " + vmname)
